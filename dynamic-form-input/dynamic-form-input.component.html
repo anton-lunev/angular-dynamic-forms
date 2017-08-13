@@ -1,0 +1,14 @@
+<div [formGroup]="form">
+  <label [attr.for]="input.key">{{input.label}}</label>
+
+  <div [ngSwitch]="input.controlType">
+    <input *ngSwitchCase="formInputTypes.TEXTBOX" [formControlName]="input.key" [id]="input.key" [type]="input.type"
+           [placeholder]="input.placeholder">
+
+    <select *ngSwitchCase="formInputTypes.DROPDOWN" [formControlName]="input.key" [id]="input.key">
+      <option *ngFor="let opt of input.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid">{{input.label}} value is invalid</div>
+</div>
